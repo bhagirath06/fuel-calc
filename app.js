@@ -108,7 +108,7 @@ function uses() {
   const coal = n('coalUses');
   const husk = n('huskUses');
   const bagasse = 100 - coal - husk;
-  $('bagasseUses').value = fmt(bagasse);
+$('bagasseUses').value = bagasse.toFixed(1);
   return { coal, husk, bagasse };
 }
 
