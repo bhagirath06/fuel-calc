@@ -1,3 +1,4 @@
+
 * { box-sizing: border-box; }
 
 :root {
@@ -24,10 +25,25 @@ header {
   padding: 16px max(16px, calc((100% - 760px) / 2));
 }
 
-header img { width: 66px; height: 66px; object-fit: contain; }
-header h1 { font-size: 25px; margin: 0 0 4px; }
-header p { margin: 0 0 5px; font-size: 14px; }
-header small { color: #c9e2ef; }
+header img {
+  width: 66px;
+  height: 66px;
+  object-fit: contain;
+}
+
+header h1 {
+  font-size: 25px;
+  margin: 0 0 4px;
+}
+
+header p {
+  margin: 0 0 5px;
+  font-size: 14px;
+}
+
+header small {
+  color: #c9e2ef;
+}
 
 main {
   width: 100%;
@@ -50,9 +66,15 @@ main {
   color: var(--navy);
 }
 
-.panel h2.subheading { margin-top: 22px; }
+.panel h2.subheading {
+  margin-top: 22px;
+}
 
-label { display: block; font-weight: 600; margin-bottom: 7px; }
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 7px;
+}
 
 input {
   width: 100%;
@@ -70,32 +92,65 @@ input:focus {
   border-color: #397da3;
 }
 
-input[readonly] { background: #edf2f5; font-weight: 700; }
-#steam { max-width: 100%; }
+input[readonly] {
+  background: #edf2f5;
+  font-weight: 700;
+}
 
-.table-wrap { width: 100%; }
-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+#steam {
+  max-width: 100%;
+}
+
+.table-wrap {
+  width: 100%;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
 th, td {
   text-align: center;
   padding: 9px 5px;
   border-bottom: 1px solid var(--line);
   overflow-wrap: anywhere;
 }
-thead th { font-size: 12px; color: #536775; }
-tbody th { text-align: left; white-space: nowrap; font-size: 14px; }
-td input { width: 100%; text-align: center; padding: 9px 3px; }
+
+thead th {
+  font-size: 12px;
+  color: #536775;
+}
+
+tbody th {
+  text-align: left;
+  white-space: nowrap;
+  font-size: 14px;
+}
+
+td input {
+  width: 100%;
+  text-align: center;
+  padding: 9px 3px;
+}
+
 .consumption {
   font-size: 13px;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
+
 .entry-note, .hint, .footnote {
   font-size: 12px;
   line-height: 1.55;
   color: var(--muted);
 }
-.entry-note { margin: 11px 0 0; }
+
+.entry-note {
+  margin: 11px 0 0;
+}
 
 .result-row {
   display: flex;
@@ -105,10 +160,12 @@ td input { width: 100%; text-align: center; padding: 9px 3px; }
   padding: 10px 2px;
   border-bottom: 1px solid #e8edf0;
 }
+
 .result-row strong {
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
+
 .grand {
   font-size: 17px;
   font-weight: 700;
@@ -117,13 +174,21 @@ td input { width: 100%; text-align: center; padding: 9px 3px; }
   padding-top: 14px;
 }
 
-.actions { display: flex; gap: 10px; }
+/* Both action buttons stay side-by-side */
+.actions {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
+}
+
 button {
-  flex: 1;
+  flex: 1 1 0;
+  width: 50%;
   min-width: 0;
   border: 0;
   border-radius: 9px;
-  padding: 14px;
+  padding: 14px 8px;
   margin: 4px 0 9px;
   background: #176b91;
   color: white;
@@ -131,7 +196,11 @@ button {
   font-weight: 700;
   cursor: pointer;
 }
-.secondary { background: #e1e9ee; color: #284353; }
+
+.secondary {
+  background: #e1e9ee;
+  color: #284353;
+}
 
 #message {
   min-height: 20px;
@@ -139,27 +208,103 @@ button {
   color: #b3261e;
   font-size: 14px;
 }
-.saved p { margin: 0; color: #526773; font-size: 14px; }
-.footnote { text-align: center; margin: 15px 5px; }
+
+.saved p {
+  margin: 0;
+  color: #526773;
+  font-size: 14px;
+}
+
+.footnote {
+  text-align: center;
+  margin: 15px 5px;
+}
 
 @media (max-width: 520px) {
-  header { padding: 13px 15px; gap: 11px; }
-  header img { width: 54px; height: 54px; }
-  header h1 { font-size: 22px; }
-  main { margin: 12px auto; padding: 0 10px 22px; }
-  .panel { padding: 13px 11px; border-radius: 11px; }
-  .panel h2 { font-size: 17px; margin-bottom: 12px; }
-  .panel h2.subheading { margin-top: 18px; }
-  th, td { padding: 8px 2px; }
-  thead th { font-size: 10px; line-height: 1.25; }
-  tbody th { font-size: 12px; }
-  td input { padding: 9px 1px; font-size: 15px; }
-  .consumption { font-size: 11px; letter-spacing: -0.2px; }
-  .result-row { padding: 9px 1px; font-size: 14px; gap: 7px; }
-  .result-row strong { font-size: 14px; }
-  .grand, .grand strong { font-size: 15px; }
-  .actions { flex-direction: column; gap: 0; }
-  button { width: 100%; flex: auto; margin: 4px 0 7px; }
+  header {
+    padding: 13px 15px;
+    gap: 11px;
+  }
+
+  header img {
+    width: 54px;
+    height: 54px;
+  }
+
+  header h1 {
+    font-size: 22px;
+  }
+
+  main {
+    margin: 12px auto;
+    padding: 0 10px 22px;
+  }
+
+  .panel {
+    padding: 13px 11px;
+    border-radius: 11px;
+  }
+
+  .panel h2 {
+    font-size: 17px;
+    margin-bottom: 12px;
+  }
+
+  .panel h2.subheading {
+    margin-top: 18px;
+  }
+
+  th, td {
+    padding: 8px 2px;
+  }
+
+  thead th {
+    font-size: 10px;
+    line-height: 1.25;
+  }
+
+  tbody th {
+    font-size: 12px;
+  }
+
+  td input {
+    padding: 9px 1px;
+    font-size: 15px;
+  }
+
+  .consumption {
+    font-size: 11px;
+    letter-spacing: -0.2px;
+  }
+
+  .result-row {
+    padding: 9px 1px;
+    font-size: 14px;
+    gap: 7px;
+  }
+
+  .result-row strong {
+    font-size: 14px;
+  }
+
+  .grand, .grand strong {
+    font-size: 15px;
+  }
+
+  .actions {
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  .actions button {
+    flex: 1 1 0;
+    width: 50%;
+    min-width: 0;
+    padding: 12px 5px;
+    font-size: 14px;
+    margin: 4px 0 7px;
+    white-space: nowrap;
+  }
 }
 
 @media (min-width: 600px) {
