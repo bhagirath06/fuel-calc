@@ -1,18 +1,96 @@
 <!doctype html>
 <html lang="hi">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#173b57"><meta name="description" content="Offline Fuel Consumption Calculator"><link rel="manifest" href="manifest.json"><link rel="icon" href="icon-192.png"><link rel="stylesheet" href="style.css"><title>Fuel Calc</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#173b57">
+  <meta name="description" content="Offline Fuel Consumption Calculator">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon-192.png">
+  <link rel="stylesheet" href="style.css">
+  <title>Fuel Calc</title>
 </head>
 <body>
-<header><img src="icon-192.png" alt="Boiler chimney logo"><div><h1>Fuel Calc</h1><p>Fuel Consumption Calculator</p><small></small></div></header>
-<main>
-<section class="panel"><h2></h2><label for="steam">Steam Generation (MT)</label><input id="steam" type="number" min="0" step="0.01" inputmode="decimal" placeholder="Enter steam generation"></section>
-<section class="panel"><h2>Fuel Uses &amp; Yield</h2><div class="table-wrap"><table><thead><tr><th>Fuel</th><th>Uses %</th><th>Yield %</th><th>Consumption MT</th></tr></thead><tbody>
-<tr><th>Coal</th><td><input id="coalUses" type="number" min="0" max="100" step="0.01" inputmode="decimal"></td><td><input id="coalYield" type="number" min="0" max="100" step="0.01" inputmode="decimal"></td><td id="coalCons">0.000</td></tr>
-<tr><th>Rice Husk</th><td><input id="huskUses" type="number" min="0" max="100" step="0.01" inputmode="decimal"></td><td><input id="huskYield" type="number" min="0" max="100" step="0.01" inputmode="decimal"></td><td id="huskCons">0.000</td></tr>
-<tr><th>Bagasse</th><td><input id="bagasseUses" type="number" readonly></td><td><input id="bagasseYield" type="number" min="0" max="100" step="0.01" inputmode="decimal"></td><td id="bagasseCons">0.000</td></tr>
-<section class="panel result"><h2>Calculation Result</h2><div class="result-row"><span>Steam Generation</span><strong id="rSteam">0.00 MT</strong></div><div class="result-row"><span>Coal Consumption</span><strong id="rCoal">0.00 MT</strong></div><div class="result-row"><span>Rice Husk Consumption</span><strong id="rHusk">0.00 MT</strong></div><div class="result-row"><span>Bagasse Consumption</span><strong id="rBagasse">0.00 MT</strong></div><div class="result-row grand"><span>Total Fuel Consumption</span><strong id="rTotal">0.00 MT</strong></div></section>
-<div id="message" role="status" aria-live="polite"></div><button id="save">Calculate &amp; Save</button><button id="clear" class="secondary">Clear Form</button>
-<section class="panel saved"><h2>Last Saved</h2><p id="lastSaved">No calculation saved yet.</p></section>
-<p class="footnote">आपका डेटा इसी मोबाइल/ब्राउज़र में सेव होता है। Browser data clear करने, app uninstall करने या फोन बदलने पर डेटा खो सकता है।</p>
-</main><script src="app.js"></script></body></html>
+  <header>
+    <img src="icon-192.png" alt="Boiler chimney logo">
+    <div>
+      <h1>Fuel Calc</h1>
+      <p>Fuel Consumption Calculator</p>
+      <small></small>
+    </div>
+  </header>
+
+  <main>
+    <!-- Entry form: always appears before calculation result, including on mobile -->
+    <section class="panel entry-panel">
+      <h2>Fuel Entry</h2>
+
+      <div class="steam-field">
+        <label for="steam">Steam Generation (MT)</label>
+        <input id="steam" type="number" min="0" step="0.001"
+               inputmode="decimal" placeholder="Enter steam generation">
+      </div>
+
+      <h2 class="subheading">Fuel Uses &amp; Yield</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Fuel</th>
+              <th scope="col">Uses %</th>
+              <th scope="col">Yield %</th>
+              <th scope="col">Consumption MT</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Coal</th>
+              <td><input id="coalUses" type="number" min="0" max="100" step="0.01" inputmode="decimal" aria-label="Coal Uses percent"></td>
+              <td><input id="coalYield" type="number" min="0" max="100" step="0.01" inputmode="decimal" aria-label="Coal Yield percent"></td>
+              <td id="coalCons" class="consumption">0.000</td>
+            </tr>
+            <tr>
+              <th scope="row">Rice Husk</th>
+              <td><input id="huskUses" type="number" min="0" max="100" step="0.01" inputmode="decimal" aria-label="Rice Husk Uses percent"></td>
+              <td><input id="huskYield" type="number" min="0" max="100" step="0.01" inputmode="decimal" aria-label="Rice Husk Yield percent"></td>
+              <td id="huskCons" class="consumption">0.000</td>
+            </tr>
+            <tr>
+              <th scope="row">Bagasse</th>
+              <td><input id="bagasseUses" type="number" readonly aria-label="Bagasse Uses percent"></td>
+              <td><input id="bagasseYield" type="number" min="0" max="100" step="0.01" inputmode="decimal" aria-label="Bagasse Yield percent"></td>
+              <td id="bagasseCons" class="consumption">0.000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="entry-note">Bagasse Uses % अपने आप 100% में से Coal और Rice Husk Uses घटाकर निकलेगा।</p>
+    </section>
+
+    <section class="panel result">
+      <h2>Calculation Result</h2>
+      <div class="result-row"><span>Steam Generation</span><strong id="rSteam">0.000 MT</strong></div>
+      <div class="result-row"><span>Coal Consumption</span><strong id="rCoal">0.000 MT</strong></div>
+      <div class="result-row"><span>Rice Husk Consumption</span><strong id="rHusk">0.000 MT</strong></div>
+      <div class="result-row"><span>Bagasse Consumption</span><strong id="rBagasse">0.000 MT</strong></div>
+      <div class="result-row grand"><span>Total Fuel Consumption</span><strong id="rTotal">0.000 MT</strong></div>
+    </section>
+
+    <div id="message" role="status" aria-live="polite"></div>
+    <div class="actions">
+      <button id="save" type="button">Calculate &amp; Save</button>
+      <button id="clear" class="secondary" type="button">Clear Form</button>
+    </div>
+
+    <section class="panel saved">
+      <h2>Last Saved</h2>
+      <p id="lastSaved">No calculation saved yet.</p>
+    </section>
+
+    <p class="footnote">आपका डेटा इसी मोबाइल/ब्राउज़र में सेव होता है। Browser data clear करने, app uninstall करने या फोन बदलने पर डेटा खो सकता है।</p>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
